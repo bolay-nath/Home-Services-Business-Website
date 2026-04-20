@@ -9,6 +9,7 @@ import ContactSection from "./component/Contact";
 import Footer from "./component/Footer";
 import WhatsappPopup from "./component/WhatsappPopup";
 import FAQSection from "./component/FAQSection";
+import WhyChooseUsSection from "./component/WhyChoseUs";
 
 export default function Home() {
   return (
@@ -19,9 +20,10 @@ export default function Home() {
       <ServiceWorker />
       <PortfolioSection />
       <PricingSection />
+      <WhyChooseUsSection />
       <FAQSection />
       <ContactSection />
-      
+      <Footer />
       <WhatsappPopup />
     </div>
   );
