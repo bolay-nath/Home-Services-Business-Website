@@ -13,11 +13,12 @@ import {
 } from "react-icons/fa";
 
 // ⭐ Stars
+// ⭐ Stars - FIXED
 function FiveStars() {
   return (
-    <div className="flex justify-center gap-1 text-amber-400">
+    <div className="flex justify-center gap-0.5 text-amber-400 p-1">
       {Array.from({ length: 5 }).map((_, i) => (
-        <FaRegStar key={i} />
+        <FaRegStar key={i} className="w-3 h-3" />
       ))}
     </div>
   );
@@ -50,7 +51,7 @@ const paintingFeatures = [
 // 🔹 Features
 const features = [
   {
-    icon: <FaPaintBrush size={28} />,
+    icon: <FaPaintBrush className="w-7 h-7" size={28} />,
     title: "Professional Service",
     text: "Experienced painters delivering precise and high-quality results.",
   },
@@ -60,22 +61,22 @@ const features = [
     text: "Trusted by hundreds of happy clients with top-rated service.",
   },
   {
-    icon: <FaCity size={28} />,
+    icon: <FaCity className="w-7 h-7" size={28} />,
     title: "Dubai Experts",
     text: "Serving all areas with reliable and professional painting solutions.",
   },
   {
-    icon: <FaFileInvoice size={28} />,
+    icon: <FaFileInvoice className="w-7 h-7" size={28} />,
     title: "Transparent Pricing",
     text: "Clear quotes with no hidden charges or surprises.",
   },
   {
-    icon: <FaShieldAlt size={28} />,
+    icon: <FaShieldAlt className="w-7 h-7" size={28} />,
     title: "Quality Guarantee",
     text: "We stand behind our work with full satisfaction guarantee.",
   },
   {
-    icon: <FaThumbsUp size={28} />,
+    icon: <FaThumbsUp className="w-7 h-7" size={28} />,
     title: "On-Time Delivery",
     text: "We complete every project on schedule and with care.",
   },
@@ -114,18 +115,25 @@ export default function WhyChooseUsSection() {
             </p>
 
             {/* SERVICES LIST */}
-            <div className="space-y-5">
+            <div className="space-y-4 sm:space-y-5">
               {paintingFeatures.map((item, i) => (
                 <div
                   key={i}
-                  className="flex items-start gap-3 justify-center lg:justify-start"
+                  className="flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-4 text-center sm:text-left px-2 sm:px-0"
                 >
-                  {item.icon}
-                  <div>
-                    <h6 className="font-semibold text-gray-800">
+                  {/* ✅ Perfectly centered icon */}
+                  <div className="flex-shrink-0 w-12 h-12 sm:w-11 sm:h-11 bg-teal-50 rounded-xl flex items-center justify-center mx-auto sm:mx-0">
+                    {item.icon}
+                  </div>
+
+                  {/* ✅ Text content */}
+                  <div className="flex-1 min-w-0">
+                    <h6 className="font-semibold text-gray-800 text-base sm:text-lg leading-tight">
                       {item.title}
                     </h6>
-                    <p className="text-gray-500 text-sm">{item.desc}</p>
+                    <p className="text-gray-500 text-sm leading-relaxed mt-1 sm:mt-0">
+                      {item.desc}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -151,15 +159,18 @@ export default function WhyChooseUsSection() {
               key={i}
               className="group bg-white rounded-2xl p-6 sm:p-8 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
             >
-              <div className="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center rounded-full bg-teal-50 text-teal-600 mb-5 group-hover:scale-110 transition">
+              {/* 🎯 PERFECTLY CENTERED ICON */}
+              <div className="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center rounded-full bg-teal-50 text-teal-600 mb-5 group-hover:scale-110 transition-all duration-300 mx-auto">
                 {item.icon}
               </div>
 
-              <h4 className="font-semibold text-lg mb-2 group-hover:text-teal-600">
+              <h4 className="font-semibold text-lg mb-2 group-hover:text-teal-600 text-center sm:text-left">
                 {item.title}
               </h4>
 
-              <p className="text-gray-500 text-sm">{item.text}</p>
+              <p className="text-gray-500 text-sm text-center sm:text-left">
+                {item.text}
+              </p>
             </div>
           ))}
         </div>

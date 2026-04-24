@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import {
   FaFacebookF,
   FaTwitter,
@@ -8,222 +8,168 @@ import {
 } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { sliderImages } from "./AllData";
+import slider1 from "@/public/images/slider/slider-1.jpg";
+import slider2 from "@/public/images/slider/slider-2.jpeg";
+import slider3 from "@/public/images/slider/slider-3.jpg";
+import slider4 from "@/public/images/slider/slider-4.avif";
+import slider5 from "@/public/images/slider/slider-5.jpg";
+
+export const sliderImages = [slider1, slider2, slider3, slider4, slider5];
 
 export default function HomeSection() {
-  // Slider state
   const [slide, setSlide] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
+  // ✅ Clean interval (no re-render issue)
   useEffect(() => {
     const interval = setInterval(() => {
-      if (!isTransitioning) {
-        setSlide((s) => (s + 1) % sliderImages.length);
-      }
+      setSlide((s) => (s + 1) % sliderImages.length);
     }, 5000);
-    return () => clearInterval(interval);
-  }, [isTransitioning]);
 
-  const goToSlide = useCallback((index) => {
-    setIsTransitioning(true);
-    setSlide(index);
-    setTimeout(() => setIsTransitioning(false), 1000);
+    return () => clearInterval(interval);
   }, []);
 
-  const socialIcons = (
-    <motion.ul
-      className="flex flex-row lg:flex-col gap-3 bg-white/95 backdrop-blur-xl shadow-2xl rounded-3xl px-4 py-3 lg:px-3 lg:py-2 border border-white/20"
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      whileHover={{ scale: 1.05 }}
-    >
-      {[
-        { icon: FaFacebookF, href: "#", label: "Facebook" },
-        { icon: FaTwitter, href: "#", label: "Twitter" },
-        { icon: FaInstagram, href: "#", label: "Instagram" },
-        { icon: FaLinkedin, href: "#", label: "LinkedIn" },
-      ].map(({ icon: Icon, href, label }, i) => (
-        <motion.li key={label} whileHover={{ y: -2 }}>
-          <a
-            href={href}
-            aria-label={label}
-            className="flex items-center justify-center w-11 h-11 lg:w-10 lg:h-10 rounded-2xl text-gray-600 hover:text-white hover:bg-gradient-to-r hover:from-teal-500 hover:to-teal-600 shadow-md transition-all duration-300 group"
-          >
-            <Icon
-              size={16}
-              className="group-hover:scale-110 transition-transform"
-            />
-          </a>
-        </motion.li>
-      ))}
-    </motion.ul>
+  const goToSlide = useCallback((index) => {
+    setSlide(index);
+  }, []);
+
+  // ✅ Memoized (no re-render cost)
+  const socialIcons = useMemo(
+    () => (
+      <ul className="flex flex-row lg:flex-col gap-3 bg-white/90 shadow-xl rounded-3xl px-4 py-3 border border-white/20">
+        {[
+          { icon: FaFacebookF, href: "#", label: "Facebook" },
+          { icon: FaTwitter, href: "#", label: "Twitter" },
+          { icon: FaInstagram, href: "#", label: "Instagram" },
+          { icon: FaLinkedin, href: "#", label: "LinkedIn" },
+        ].map(({ icon: Icon, href, label }) => (
+          <li key={label}>
+            <a
+              href={href}
+              aria-label={label}
+              className="flex items-center justify-center w-11 h-11 rounded-2xl text-gray-600 hover:text-white hover:bg-teal-600 transition-all duration-300"
+            >
+              <Icon size={16} />
+            </a>
+          </li>
+        ))}
+      </ul>
+    ),
+    [],
   );
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
-  };
 
   return (
     <section
       id="home"
       className="relative overflow-hidden pt-28 pb-16 min-h-screen flex flex-col justify-between"
-      role="banner"
-      aria-label="Hero section"
     >
       {/* Background slider */}
       <div className="absolute inset-0 z-0">
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="sync">
           <motion.div
             key={slide}
             className="absolute inset-0"
-            initial={{ opacity: 0, scale: 1.1 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.05 }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8 }}
           >
             <Image
               src={sliderImages[slide]}
-              alt={`Premium painting project ${slide + 1}`}
+              alt={`Slide ${slide + 1}`}
               fill
               priority={slide === 0}
+              loading={slide === 0 ? "eager" : "lazy"}
               sizes="100vw"
+              quality={75}
+              placeholder="blur"
               className="object-cover"
-              quality={[75, 85]}
             />
           </motion.div>
         </AnimatePresence>
 
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/60 to-black/80" />
-        <div className="absolute inset-0 bg-gradient-to-r from-teal-900/10 to-transparent" />
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/60" />
       </div>
 
       {/* Slider dots */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-2">
         {sliderImages.map((_, i) => (
-          <motion.button
+          <button
             key={i}
             onClick={() => goToSlide(i)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              i === slide
-                ? "w-10 bg-white shadow-lg"
-                : "bg-white/50 hover:bg-white hover:w-6"
+            className={`h-3 rounded-full transition-all duration-300 ${
+              i === slide ? "w-8 bg-white" : "w-3 bg-white/50"
             }`}
-            aria-label={`Go to slide ${i + 1} of ${sliderImages.length}`}
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.9 }}
           />
         ))}
       </div>
 
-      {/* Social Icons - Desktop */}
-      <motion.div
-        className="hidden lg:flex absolute right-6 xl:right-12 top-1/2 -translate-y-1/2 z-20"
-        variants={itemVariants}
-      >
+      {/* Desktop Social */}
+      <div className="hidden lg:flex absolute right-6 top-1/2 -translate-y-1/2 z-20">
         {socialIcons}
-      </motion.div>
+      </div>
 
-      {/* Main Content */}
+      {/* ✅ Main Content with SAFE motion */}
       <motion.div
-        className="relative z-20 container mx-auto px-4 md:px-8 flex-1 flex flex-col lg:flex-row items-center justify-center w-full py-12"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
+        className="relative z-20 container mx-auto px-4 flex-1 flex items-center"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
       >
-        <motion.div
-          className="flex-1 text-center lg:text-left text-white max-w-2xl lg:pr-16 xl:pr-24"
-          variants={itemVariants}
-        >
-          {/* Subtitle */}
-          <motion.span
-            className="inline-block bg-gradient-to-r from-teal-500/20 to-teal-400/20 text-teal-100 px-8 py-4 rounded-3xl text-xl md:text-2xl font-bold mb-8 backdrop-blur-md border border-teal-500/30 shadow-2xl"
-            variants={itemVariants}
-          >
+        <div className="text-white max-w-2xl">
+          <span className="inline-block bg-teal-500/20 px-6 py-3 rounded-xl text-lg mb-6">
             Professional Painting Experts
-          </motion.span>
+          </span>
 
-          {/* Main heading - INSTANT & IMPACTFUL */}
+          {/* ✅ Animated heading */}
           <motion.h1
-            className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-8 leading-tight bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent drop-shadow-2xl"
-            variants={itemVariants}
+            className="text-5xl md:text-6xl font-bold mb-6 leading-tight"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
           >
             Transform Your Space
-            <span className="block text-teal-400 drop-shadow-xl">
-              with Expert Painting
-            </span>
+            <span className="block text-teal-400">with Expert Painting</span>
           </motion.h1>
 
-          {/* Services */}
-          <motion.p
-            className="text-2xl md:text-3xl font-bold mb-8 text-teal-100 tracking-wide uppercase"
-            variants={itemVariants}
-          >
+          <p className="text-xl mb-6 text-teal-100">
             Interior • Exterior • Villa • Apartment
-          </motion.p>
+          </p>
 
-          {/* Description */}
+          {/* ✅ Light animation */}
           <motion.p
-            className="text-xl md:text-2xl mb-12 max-w-2xl mx-auto lg:mx-0 text-gray-200 leading-relaxed font-light"
-            variants={itemVariants}
+            className="text-lg mb-10 text-gray-200"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
           >
-            Premium painting services with flawless finishes, meticulous
-            execution, and durable results. From luxury villas to commercial
-            spaces — we deliver perfection in every stroke.
+            Premium painting services with flawless finishes and durable
+            results.
           </motion.p>
 
-          {/* CTA Buttons */}
-          <motion.div
-            className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start items-center"
-            variants={itemVariants}
-          >
+          {/* Buttons (NO motion, use CSS) */}
+          <div className="flex gap-4 flex-wrap">
             <a
               href="#contact"
-              className="group relative inline-flex items-center px-12 py-5 bg-gradient-to-r from-teal-500 via-teal-600 to-teal-700 text-white font-bold text-xl rounded-3xl shadow-2xl hover:shadow-teal-500/50 transform hover:-translate-y-2 transition-all duration-500 overflow-hidden backdrop-blur-sm border border-teal-500/20"
-              aria-label="Get your free painting quote today"
+              className="px-8 py-4 bg-teal-600 text-white rounded-xl font-semibold hover:bg-teal-700 transition"
             >
-              <span className="relative z-10 tracking-wide">
-                Get Free Quote
-              </span>
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent blur opacity-75 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
-                whileHover={{ x: "100%" }}
-              />
+              Get Free Quote
             </a>
 
             <a
               href="#services"
-              className="inline-flex items-center px-12 py-5 border-2 border-white/60 text-white font-bold text-xl rounded-3xl hover:bg-white/20 hover:border-white transition-all duration-300 backdrop-blur-sm hover:shadow-2xl"
+              className="px-8 py-4 border border-white text-white rounded-xl hover:bg-white/10 transition"
             >
               Explore Services
             </a>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </motion.div>
 
-      {/* Mobile Social Icons */}
-      <motion.div
-        className="relative z-20 lg:hidden flex justify-center w-full mt-16 px-4"
-        variants={itemVariants}
-      >
+      {/* Mobile Social */}
+      <div className="relative z-20 lg:hidden flex justify-center mt-10">
         {socialIcons}
-      </motion.div>
+      </div>
     </section>
   );
 }
