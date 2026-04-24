@@ -1,7 +1,5 @@
-import Image from "next/image";
 import Nav from "./component/Nav";
 import HomeSection from "./component/Home";
-import AboutSection from "./component/About";
 import ServiceWorker from "./component/Services";
 import PortfolioSection from "./component/Portfolio";
 import PricingSection from "./component/Priching";
@@ -20,7 +18,6 @@ export default function Home() {
       <ServiceWorker />
       <PortfolioSection />
       <ProcessSection />
-      <AboutSection />
       <PricingSection />
       <WhyChooseUsSection />
       <FAQSection />
