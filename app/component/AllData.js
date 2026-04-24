@@ -21,10 +21,10 @@ export const serviceDropdown = [
 
 // Slider data and Image data for the HomeSection component.
 export const sliderImages = [
-  "/images/slider/slider-1.avif", // Place your images in /public/images/slider/
+  "/images/slider/slider-1.jpg", // Place your images in /public/images/slider/
   "/images/slider/slider-2.jpeg",
   "/images/slider/slider-3.jpg",
-  "/images/slider/slider-4.jpg",
+  "/images/slider/slider-4.avif",
   "/images/slider/slider-5.jpg",
 ];
 
