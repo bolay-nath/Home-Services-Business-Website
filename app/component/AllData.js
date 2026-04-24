@@ -37,17 +37,17 @@ export const servicesSections = [
     color: "from-amber-500 to-orange-500",
     services: [
       {
-        image: "/images/Villa/villa-1.jpeg",
+        image: "/images/Villa/villa-picture-1.jpeg",
         title: "Luxury Interior Painting",
         text: "Premium villa interiors with high-end finishes, custom colors & flawless execution.",
       },
       {
-        image: "/images/Villa/villa-2.jpeg",
+        image: "/images/Villa/villa-picture-2.jpeg",
         title: "Exterior Villa Facade",
         text: "Weatherproof exterior painting that enhances architectural beauty & longevity.",
       },
       {
-        image: "/images/Villa/villa-3.jpeg",
+        image: "/images/Villa/villa-picture-3.jpeg",
         title: "Ceiling & Moulding Work",
         text: "Expert crown moulding, tray ceilings & intricate detail painting.",
       },
