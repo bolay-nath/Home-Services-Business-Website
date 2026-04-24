@@ -1,109 +1,130 @@
-export default function PricingSection() {
-  const plans = [
+"use client"; // Add if using Next.js App Router
+
+import { useState } from "react";
+
+export default function ServicesSection() {
+  const services = [
     {
-      name: "Basic",
-      price: 99,
-      period: "/monthly",
-      highlight: false,
-      btn: "get started",
-      btnStyle: "btn-2",
+      title: "Luxury Villa Painting",
+      desc: "Complete interior & exterior villa painting with premium weather-resistant coatings for long-lasting protection.",
       features: [
-        "5 GB BandWidth",
-        "Free Update",
-        "High Regulation Printing",
-        "Branding",
-        "Another Great Features",
+        "Waterproof exterior coatings",
+        "Thermal insulating paints",
+        "Decorative finishes & textures",
+        "Masonry & concrete repair",
+        "Premium quality guarantee",
       ],
+      icon: "🏠",
     },
     {
-      name: "Premium",
-      price: 199,
-      period: "/monthly",
-      highlight: true,
-      btn: "get started",
-      btnStyle: "btn-1",
+      title: "Apartment Painting",
+      desc: "From studio to penthouse, we provide smooth and fast apartment painting with complete makeover solutions.",
       features: [
-        "5 GB BandWidth",
-        "Free Update",
-        "High Regulation Printing",
-        "Branding",
-        "Another Great Features",
+        "Eco-friendly odor-free paints",
+        "Same-day service available",
+        "Furniture protection included",
+        "Wall repair & plastering",
+        "Premium quality guarantee",
       ],
+      icon: "🏢",
     },
     {
-      name: "Ultimate",
-      price: 299,
-      period: "/monthly",
-      highlight: false,
-      btn: "get started",
-      btnStyle: "btn-2",
+      title: "Commercial Painting",
+      desc: "Professional painting for offices, shops, and buildings with minimal disruption to your business.",
       features: [
-        "5 GB BandWidth",
-        "Free Update",
-        "High Regulation Printing",
-        "Branding",
-        "Another Great Features",
+        "After-hours & weekend work",
+        "Fire-resistant coatings",
+        "Anti-bacterial paints",
+        "Corporate discounts",
+        "Premium quality guarantee",
       ],
+      icon: "🏛️",
     },
   ];
 
+  const [hoveredCard, setHoveredCard] = useState(null);
+
+  const handleQuoteClick = (service) => {
+    // Add your quote functionality here (e.g., modal, scroll to form, analytics)
+    console.log(`Quote requested for: ${service.title}`);
+    // Example: gtag('event', 'quote_request', { service: service.title });
+  };
+
   return (
-    <section id="pricing" className="bg-gray-50 py-20 px-4">
-      <div className="container mx-auto max-w-6xl">
-        {/* Section Title */}
-        <div className="text-center mb-12">
-          <h5 className="text-teal-500 font-semibold text-lg">pricing</h5>
-          <h3 className="text-3xl md:text-4xl font-bold mb-2">Pricing Plans</h3>
-          <ul className="flex gap-2 justify-center pb-2">
-            <li className="w-16 h-1 rounded-full bg-teal-500"></li>
-            <li className="w-3 h-1 rounded-full bg-teal-500"></li>
-            <li className="w-2 h-1 rounded-full bg-teal-500"></li>
-          </ul>
+    <section
+      className="bg-gradient-to-br from-gray-50 to-teal-50 py-20 px-4"
+      role="region"
+      aria-labelledby="services-heading"
+    >
+      <div className="max-w-6xl mx-auto">
+        {/* Title */}
+        <div className="text-center mb-16">
+          <span className="inline-block bg-teal-100 text-teal-600 px-4 py-2 rounded-full text-sm font-semibold uppercase tracking-wide mb-4">
+            Professional Painting Services
+          </span>
+          <h2
+            id="services-heading"
+            className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent"
+          >
+            Our Premium <span className="text-teal-500">Painting Services</span>
+          </h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {plans.map((plan, idx) => (
-            <div
-              key={idx}
-              className={`rounded-2xl overflow-hidden shadow-lg bg-white flex flex-col transition
-                ${plan.highlight ? "ring-2 ring-teal-500 scale-105 z-10 relative" : ""}
-              `}
+
+        {/* Cards */}
+        <div className="grid md:grid-cols-3 gap-8">
+          {services.map((item, i) => (
+            <article
+              key={item.title}
+              className="group bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02] border border-gray-100"
+              role="article"
+              aria-labelledby={`service-title-${i}`}
+              onMouseEnter={() => setHoveredCard(i)}
+              onMouseLeave={() => setHoveredCard(null)}
             >
-              {/* Plan Header */}
-              <div className="relative px-8 py-6 border-b">
-                <h3 className="text-2xl font-bold text-gray-900 capitalize">{plan.name}</h3>
-                {plan.highlight && (
-                  <span className="absolute right-0 top-3 bg-teal-500 text-white px-4 py-1 rounded-l-xl text-sm font-bold rotate-12">best value</span>
-                )}
+              {/* Header */}
+              <div className="bg-gradient-to-r from-teal-600 to-teal-700 text-white px-8 py-8 relative overflow-hidden">
+                <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-all duration-500" />
+                <div className="relative z-10 flex items-center gap-4">
+                  <div className="text-4xl group-hover:scale-110 transition-transform duration-300">
+                    {item.icon}
+                  </div>
+                  <h3 id={`service-title-${i}`} className="text-2xl font-bold">
+                    {item.title}
+                  </h3>
+                </div>
               </div>
-              {/* Price */}
-              <div className="flex items-end justify-center px-8 py-8 gap-1">
-                <span className="text-base text-gray-400 font-medium">$</span>
-                <span className="text-5xl md:text-6xl font-bold text-teal-500 leading-tight">{plan.price}</span>
-                <span className="text-base text-gray-400 font-medium">{plan.period}</span>
-              </div>
-              {/* Features */}
-              <ul className="flex-1 px-8 pb-4">
-                {plan.features.map((feature, i) => (
-                  <li key={i} className="py-2 border-b last:border-b-0 flex items-center gap-2 text-gray-600">
-                    <span className="text-teal-500 font-bold text-xl">✓</span>
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              {/* Footer */}
-              <div className="px-8 pb-8 mt-auto flex justify-center">
-                <a
-                  href="#"
-                  className={`inline-block px-8 py-3 rounded-md font-semibold transition text-center
-                    ${plan.highlight
-                      ? "bg-teal-500 text-white hover:bg-teal-600 shadow"
-                      : "border border-teal-500 text-teal-500 bg-white hover:bg-teal-500 hover:text-white"
-                    }`}
+
+              {/* Content */}
+              <div className="p-8">
+                <p className="text-gray-600 mb-8 text-base leading-relaxed">
+                  {item.desc}
+                </p>
+
+                {/* Features */}
+                <ul className="space-y-4 mb-8" role="list">
+                  {item.features.map((feature, idx) => (
+                    <li
+                      key={idx}
+                      className="flex items-start gap-3 text-gray-700 group-hover:text-gray-900 transition-colors"
+                    >
+                      <span className="text-teal-500 font-bold text-lg flex-shrink-0 mt-0.5">
+                        ✓
+                      </span>
+                      <span className="font-medium">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Button */}
+                <button
+                  onClick={() => handleQuoteClick(item)}
+                  className="w-full bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white px-8 py-4 rounded-2xl font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-teal-500/50 focus-visible:ring-4"
+                  aria-label={`Get a quote for ${item.title}`}
                 >
-                  {plan.btn}
-                </a>
+                  Get Your Free Quote
+                </button>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>

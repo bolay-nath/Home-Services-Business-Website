@@ -90,7 +90,7 @@ export default function WhyChooseUsSection() {
           {/* IMAGE */}
           <div className="relative w-full h-[300px] sm:h-[400px] lg:h-[500px]">
             <Image
-              src="/images/WhyChooseUs-1.jpg"
+              src="/images/WhyChooseUs/WhyChooseUs-1.jpg"
               alt="Professional painting services"
               fill
               className="object-cover rounded-2xl shadow-xl"

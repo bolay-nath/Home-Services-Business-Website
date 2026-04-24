@@ -2,34 +2,9 @@
 import { useState } from "react";
 import Image from "next/image";
 import { FaPlus, FaMinus } from "react-icons/fa";
+import { faqs } from "./AllData";
 
-const faqs = [
-  {
-    question: "What painting services do you offer?",
-    answer:
-      "We offer a full range of painting services: apartment, villa, and office painting; interior and exterior; wall preparation; color consultation; and more.",
-  },
-  {
-    question: "How can I get a quote?",
-    answer:
-      "Contact us via WhatsApp, fill out our contact form, or call us directly. We'll schedule a free inspection and provide a detailed quotation.",
-  },
-  {
-    question: "Do you use eco-friendly paints?",
-    answer:
-      "Yes! We offer eco-friendly and low-VOC paint options for health and safety. Just let us know your preference.",
-  },
-  {
-    question: "How long does a typical painting job take?",
-    answer:
-      "Most apartments are finished in 1–3 days. Villas and large projects may take longer depending on size and requirements. We always work efficiently with minimal disruption.",
-  },
-  {
-    question: "Will you move and protect furniture?",
-    answer:
-      "Absolutely! We carefully move, cover, and protect all furniture and floors before we begin, and restore everything after completion.",
-  },
-];
+
 
 export default function FAQSection() {
   const [open, setOpen] = useState([]);
@@ -50,7 +25,7 @@ export default function FAQSection() {
         <div className="w-full md:w-1/2 flex justify-center md:justify-start mb-8 md:mb-0">
           <div className="relative w-full max-w-[400px] h-72 md:h-96">
             <Image
-              src="/images/FAQ-1.jpg"
+              src="/images/FAQ/FAQ-1.jpg"
               alt="Professional painting FAQ"
               fill
               className="rounded-2xl object-cover"
