@@ -1,23 +1,37 @@
 import { FaWhatsapp } from "react-icons/fa";
 
 export default function WhatsappPopup() {
-  // Your WhatsApp phone number (in international format, no + or spaces)
-  const whatsappNumber = "971501234567"; // Replace with your own
-
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Hello!%20I'm%20interested%20in%20your%20painting%20services.`;
+  // Your Pakistan number (updated)
+  const whatsappNumber = "923498309488";
+  
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Hi!%20Painting%20quote%20for%20Rawalpindi.`;
 
   return (
     <a
       href={whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed z-50 bottom-6 right-6"
-      aria-label="WhatsApp"
+      className="fixed z-[9999] bottom-4 right-4 md:bottom-6 md:right-6" // ✅ Mobile: closer to edge
+      aria-label="WhatsApp Chat"
     >
-      {/* WhatsApp Button */}
-      <div className="flex items-center gap-2 bg-green-500 text-white px-4 py-3 rounded-full shadow-lg hover:bg-green-600 transition group">
-        <FaWhatsapp size={28} className="animate-bounce group-hover:animate-none" />
-        <span className="hidden md:block font-semibold">Chat with us</span>
+      {/* ✅ Mobile-First WhatsApp Button */}
+      <div className="flex items-center justify-center gap-2.5 
+        bg-gradient-to-r from-green-500 to-green-600 
+        text-white px-3.5 py-3 md:px-4 md:py-3.5 
+        rounded-full shadow-xl hover:shadow-green-500/50 
+        hover:from-green-600 hover:to-green-700 
+        transition-all duration-200 group
+        active:scale-95 md:hover:scale-105">
+        
+        <FaWhatsapp 
+          size={24} // ✅ Smaller for mobile
+          className="text-white drop-shadow-lg group-hover:rotate-12 transition-transform duration-200" 
+        />
+        
+        {/* ✅ Mobile: Icon only | Desktop: Text + Icon */}
+        <span className="hidden text-xs md:inline font-bold tracking-wide">
+          Chat Now
+        </span>
       </div>
     </a>
   );

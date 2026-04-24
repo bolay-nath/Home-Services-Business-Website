@@ -52,13 +52,19 @@ const features = [
 
 export default function WhyChooseUsSection() {
   return (
-    <section className="py-20 px-4 bg-white" id="why-choose-us">
+    <section className="py-16 md:py-20 px-4 bg-white">
       <div className="container mx-auto max-w-6xl">
         {/* Heading */}
         <div className="text-center mb-14">
-          <h2 className="text-3xl md:text-4xl font-bold mb-3">
-            why choose <span className="text-teal-500 font-extrabold">Jartech</span>?
-          </h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 leading-tight">
+  Why Choose <br />
+  <span className="text-teal-500 font-extrabold">
+    Modern Painting Services
+  </span>?
+</h2>
+
+
+
           <p className="text-gray-500 text-lg">
             Our professional painting service can transform your home & provide true peace of mind
           </p>
@@ -68,9 +74,10 @@ export default function WhyChooseUsSection() {
           {features.map((feature, i) => (
             <div
               key={i}
-              className="bg-white border rounded-2xl p-8 flex flex-col items-center text-center shadow-lg hover:shadow-2xl transition hover:-translate-y-2 duration-300"
+              className="bg-white border rounded-2xl p-8 flex flex-col items-center text-center shadow-lg hover:shadow-2xl transition hover:-translate-y-2 hover:scale-[1.02] duration-500 ease-out"
+
             >
-              <div className={`mb-5 inline-flex items-center justify-center w-16 h-16 rounded-full ${feature.iconBg}`}>
+              <div className={`mb-5 inline-flex items-center justify-center w-16 h-16 rounded-full ${feature.iconBg} text-teal-600`}>
                 {feature.icon}
               </div>
               <h3 className="font-bold text-lg mb-2 text-gray-800">{feature.title}</h3>

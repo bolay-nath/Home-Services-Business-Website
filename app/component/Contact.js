@@ -1,116 +1,71 @@
-"use client";
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
-import { useState } from "react";
 
 export default function ContactSection() {
-  // Basic form state handling (not connected to backend)
-  const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
-
+ 
+  
   return (
-    <section id="contact" className="min-h-screen bg-white py-20 px-4">
-      <div className="container mx-auto max-w-6xl">
-        {/* Section Title */}
-        <div className="text-center mb-10">
-          <h5 className="text-teal-500 font-semibold text-lg">contact</h5>
-          <h3 className="text-3xl md:text-4xl font-bold mb-2">Get in touch</h3>
-          <ul className="flex gap-2 justify-center pb-2">
-            <li className="w-16 h-1 rounded-full bg-teal-500"></li>
-            <li className="w-3 h-1 rounded-full bg-teal-500"></li>
-            <li className="w-2 h-1 rounded-full bg-teal-500"></li>
-          </ul>
-        </div>
+    <>  
+      {/* ================= CONTACT SECTION ================= */}
+      <section id="contact" className="bg-gradient-to-b from-white via-gray-50 to-blue-50 py-20 px-4 relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute top-20 right-20 w-72 h-72 bg-teal-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-teal-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        
+        <div className="max-w-4xl mx-auto relative z-10">
+          <div className="text-center mb-16">
+            <span className="inline-block px-4 py-2 bg-teal-100 text-teal-700 text-sm font-semibold rounded-full uppercase tracking-wider mb-4">
+              Contact Us
+            </span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 bg-gradient-to-r from-gray-900 via-gray-800 to-teal-900 bg-clip-text text-transparent leading-tight">
+              Ready to Transform Your Space?
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              Get your free quote today. Professional painting services just a call away.
+            </p>
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          <ContactInfo
-            icon={<FaPhone size={24} />}
-            label="Phone"
-            value="03498309488"
-          />
-          <ContactInfo
-            icon={<FaEnvelope size={24} />}
-            label="Email"
-            value="codercryptical@gmail.com"
-          />
-          <ContactInfo
-            icon={<FaMapMarkerAlt size={24} />}
-            label="Address"
-            value="Rawalpindi"
-          />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            <ContactInfo
+              icon={<FaPhone size={24} />}
+              label="Call Us"
+              value="+92 349 8309488"
+              link="tel:+923498309488"
+            />
+            <ContactInfo
+              icon={<FaEnvelope size={24} />}
+              label="Email"
+              value="codercryptical@gmail.com"
+              link="mailto:codercryptical@gmail.com"
+            />
+            <ContactInfo
+              icon={<FaMapMarkerAlt size={24} />}
+              label="Location"
+              value="Rawalpindi, Pakistan"
+            />
+          </div>
         </div>
-
-        {/* Contact Form */}
-        <div className="bg-gray-50 p-8 rounded-2xl shadow-md max-w-3xl mx-auto">
-          <form onSubmit={e => { e.preventDefault(); alert("Message sent! (Demo)"); }}>
-            <div className="flex flex-col md:flex-row gap-8">
-              <div className="md:w-1/2 flex flex-col gap-6">
-                <div>
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Name"
-                    className="w-full border border-teal-100 rounded-2xl px-4 py-3 outline-none focus:border-teal-500 bg-white"
-                    value={form.name}
-                    onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
-                    required
-                  />
-                </div>
-                <div>
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    className="w-full border border-teal-100 rounded-2xl px-4 py-3 outline-none focus:border-teal-500 bg-white"
-                    value={form.email}
-                    onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-                    required
-                  />
-                </div>
-                <div>
-                  <input
-                    type="text"
-                    name="subject"
-                    placeholder="Subject"
-                    className="w-full border border-teal-100 rounded-2xl px-4 py-3 outline-none focus:border-teal-500 bg-white"
-                    value={form.subject}
-                    onChange={e => setForm(f => ({ ...f, subject: e.target.value }))}
-                  />
-                </div>
-              </div>
-              <div className="md:w-1/2 flex flex-col gap-6">
-                <div>
-                  <textarea
-                    name="message"
-                    placeholder="Message"
-                    className="w-full border border-teal-100 rounded-2xl px-4 py-3 outline-none focus:border-teal-500 bg-white min-h-[130px]"
-                    value={form.message}
-                    onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
-                    required
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="flex justify-end mt-6">
-              <button
-                type="submit"
-                className="inline-block bg-teal-500 text-white px-8 py-3 rounded-md font-semibold shadow hover:bg-teal-600 transition"
-              >
-                Send Message
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 
-// Small card for contact info
-function ContactInfo({ icon, label, value }) {
+// ✅ ENHANCED ContactInfo Component
+function ContactInfo({ icon, label, value, link }) {
   return (
-    <div className="bg-gray-50 rounded-xl shadow p-8 text-center flex flex-col items-center">
-      <div className="mb-2 text-teal-500">{icon}</div>
-      <span className="font-semibold text-gray-700 text-lg">{label}</span>
-      <p className="text-gray-500">{value}</p>
-    </div>
+    <a 
+      href={link} 
+      className="group bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg p-8 text-center flex flex-col items-center 
+      hover:shadow-2xl hover:-translate-y-2 hover:bg-white transition-all duration-500 border border-gray-100 
+      hover:border-teal-200 hover:ring-4 hover:ring-teal-50"
+    >
+      <div className="w-16 h-16 bg-gradient-to-br from-teal-500 to-teal-600 rounded-2xl flex items-center justify-center 
+      mb-6 shadow-xl group-hover:shadow-2xl group-hover:scale-110 transition-all duration-300 mx-auto">
+        <div className="text-2xl text-white drop-shadow-lg">{icon}</div>
+      </div>
+      <h3 className="font-bold text-xl text-gray-800 mb-2 group-hover:text-teal-600 transition-colors">
+        {label}
+      </h3>
+      <p className="text-gray-600 text-lg font-medium leading-tight">{value}</p>
+    </a>
   );
 }

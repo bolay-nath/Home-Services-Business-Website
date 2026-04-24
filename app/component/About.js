@@ -35,7 +35,7 @@ export default function PaintingAboutSection() {
         <div className="w-full md:w-[410px] md:h-[510px] flex justify-center mb-8 md:mb-0 relative">
           <div className="relative w-full h-[320px] md:w-[410px] md:h-[510px]">
             <Image
-              src="/images/team.png"
+              src="/images/WhyChooseUs-1.jpg"
               alt="Painting services team"
               fill
               sizes="(max-width: 768px) 100vw, 410px"

@@ -4,9 +4,9 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa"
 import Image from "next/image";
 
 const sliderImages = [
-  "/images/slider/paint1.jpg", // Place your images in /public/images/slider/
+  "/images/sliding-2.jpeg", // Place your images in /public/images/slider/
   "/images/slider/paint2.jpg",
-  "/images/slider/paint3.jpg",
+  "/images/sliding-4.jpg",
 ];
 
 
@@ -23,23 +23,25 @@ export default function HomeSection() {
 
     const typing = setInterval(() => {
       if (forward) {
-        setTypedText(fullText.slice(0, index));
         index++;
-        if (index > fullText.length) {
+        setTypedText(fullText.slice(0, index));
+
+        if (index === fullText.length) {
           forward = false;
-          setTimeout(() => { }, 2000); // pause
         }
       } else {
-        setTypedText(fullText.slice(0, index));
         index--;
+        setTypedText(fullText.slice(0, index));
+
         if (index === 0) {
           forward = true;
         }
       }
-    }, 70);
+    }, 100);
 
     return () => clearInterval(typing);
   }, []);
+
 
   //finished typing effect
   const [slide, setSlide] = useState(0);
@@ -51,14 +53,50 @@ export default function HomeSection() {
     return () => clearInterval(interval);
   }, []);
 
-  const socialIcons = (
-    <ul className="flex flex-row lg:flex-col gap-2 border border-teal-500/20 rounded-full bg-white shadow px-2 py-1 lg:p-0">
-      <li><a href="#" className="block p-2 text-gray-400 hover:text-teal-500 transition" aria-label="Facebook"><FaFacebookF size={20} /></a></li>
-      <li><a href="#" className="block p-2 text-gray-400 hover:text-teal-500 transition" aria-label="Twitter"><FaTwitter size={20} /></a></li>
-      <li><a href="#" className="block p-2 text-gray-400 hover:text-teal-500 transition" aria-label="Instagram"><FaInstagram size={20} /></a></li>
-      <li><a href="#" className="block p-2 text-gray-400 hover:text-teal-500 transition" aria-label="LinkedIn"><FaLinkedin size={20} /></a></li>
-    </ul>
-  );
+const socialIcons = (
+  <ul className="flex flex-row lg:flex-col gap-3 bg-white/90 backdrop-blur-md shadow-xl rounded-full px-3 py-2 border border-gray-200">
+    <li>
+      <a
+        href="#"
+        aria-label="Facebook"
+        className="flex items-center justify-center w-9 h-9 rounded-full text-gray-500 hover:text-white hover:bg-teal-500 transition-all duration-300"
+      >
+        <FaFacebookF size={16} />
+      </a>
+    </li>
+
+    <li>
+      <a
+        href="#"
+        aria-label="Twitter"
+        className="flex items-center justify-center w-9 h-9 rounded-full text-gray-500 hover:text-white hover:bg-teal-500 transition-all duration-300"
+      >
+        <FaTwitter size={16} />
+      </a>
+    </li>
+
+    <li>
+      <a
+        href="#"
+        aria-label="Instagram"
+        className="flex items-center justify-center w-9 h-9 rounded-full text-gray-500 hover:text-white hover:bg-teal-500 transition-all duration-300"
+      >
+        <FaInstagram size={16} />
+      </a>
+    </li>
+
+    <li>
+      <a
+        href="#"
+        aria-label="LinkedIn"
+        className="flex items-center justify-center w-9 h-9 rounded-full text-gray-500 hover:text-white hover:bg-teal-500 transition-all duration-300"
+      >
+        <FaLinkedin size={16} />
+      </a>
+    </li>
+  </ul>
+);
+
 
   return (
     <section
@@ -74,17 +112,20 @@ export default function HomeSection() {
             alt=""
             fill
             priority={idx === 0}
-            className={`object-cover transition-opacity duration-2000 ${idx === slide ? "opacity-100" : "opacity-0"
+            sizes="100vw"
+            className={`object-cover transition-opacity duration-2000ms ${idx === slide ? "opacity-100" : "opacity-0"
               }`}
           />
+
         ))}
         <div className="absolute inset-0 bg-black/60" />
       </div>
 
       {/* Social Icons - Desktop (right side) */}
-      <div className="hidden lg:flex flex-col gap-2 absolute right-6 top-1/2 -translate-y-1/2 z-10 items-end">
-        {socialIcons}
-      </div>
+      <div className="hidden lg:flex absolute right-4 xl:right-8 top-1/2 -translate-y-1/2 z-10">
+  {socialIcons}
+</div>
+
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 flex-1 flex flex-col md:flex-row items-center w-full">
         {/* Left (Text) */}

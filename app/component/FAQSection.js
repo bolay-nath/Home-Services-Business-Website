@@ -50,7 +50,7 @@ export default function FAQSection() {
         <div className="w-full md:w-1/2 flex justify-center md:justify-start mb-8 md:mb-0">
           <div className="relative w-full max-w-[400px] h-72 md:h-96">
             <Image
-              src="/images/hero.png"
+              src="/images/FAQ-1.jpg"
               alt="Professional painting FAQ"
               fill
               className="rounded-2xl object-cover"

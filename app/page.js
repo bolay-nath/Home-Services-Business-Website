@@ -10,15 +10,17 @@ import Footer from "./component/Footer";
 import WhatsappPopup from "./component/WhatsappPopup";
 import FAQSection from "./component/FAQSection";
 import WhyChooseUsSection from "./component/WhyChoseUs";
+import ProcessSection from "./component/ProcessSection";
 
 export default function Home() {
   return (
     <div>
       <Nav />
       <HomeSection />
-      <AboutSection />
       <ServiceWorker />
       <PortfolioSection />
+      <ProcessSection />
+      <AboutSection />
       <PricingSection />
       <WhyChooseUsSection />
       <FAQSection />
