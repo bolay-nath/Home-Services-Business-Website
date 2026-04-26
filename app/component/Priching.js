@@ -1,6 +1,7 @@
 "use client"; // Add if using Next.js App Router
 
 import { useState } from "react";
+import { whatsappUrl } from "./AllData"; // Import WhatsApp URL
 
 export default function ServicesSection() {
   const services = [
@@ -116,13 +117,16 @@ export default function ServicesSection() {
                 </ul>
 
                 {/* Button */}
-                <button
-                  onClick={() => handleQuoteClick(item)}
-                  className="w-full bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white px-8 py-4 rounded-2xl font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-teal-500/50 focus-visible:ring-4"
-                  aria-label={`Get a quote for ${item.title}`}
-                >
-                  Get Your Free Quote
-                </button>
+
+                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+                  <button
+                    onClick={() => handleQuoteClick(item)}
+                    className="w-full bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white px-8 py-4 rounded-2xl font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-teal-500/50 focus-visible:ring-4"
+                    aria-label={`Get a quote for ${item.title}`}
+                  >
+                    Get Your Free Quote
+                  </button>
+                </a>
               </div>
             </article>
           ))}

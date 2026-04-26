@@ -1,16 +1,17 @@
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 
 export default function ContactSection() {
- 
-  
   return (
-    <>  
+    <>
       {/* ================= CONTACT SECTION ================= */}
-      <section id="contact" className="bg-gradient-to-b from-white via-gray-50 to-blue-50 py-20 px-4 relative overflow-hidden">
+      <section
+        id="contact"
+        className="bg-gradient-to-b from-white via-gray-50 to-blue-50 py-20 px-4 relative overflow-hidden"
+      >
         {/* Background decoration */}
         <div className="absolute top-20 right-20 w-72 h-72 bg-teal-100 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
         <div className="absolute -bottom-8 left-20 w-72 h-72 bg-teal-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-        
+
         <div className="max-w-4xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <span className="inline-block px-4 py-2 bg-teal-100 text-teal-700 text-sm font-semibold rounded-full uppercase tracking-wider mb-4">
@@ -20,7 +21,8 @@ export default function ContactSection() {
               Ready to Transform Your Space?
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              Get your free quote today. Professional painting services just a call away.
+              Get your free quote today. Professional painting services just a
+              call away.
             </p>
           </div>
 
@@ -28,19 +30,19 @@ export default function ContactSection() {
             <ContactInfo
               icon={<FaPhone size={24} />}
               label="Call Us"
-              value="+92 349 8309488"
-              link="tel:+923498309488"
+              value="+971563202168"
+              link="tel:+971563202168"
             />
             <ContactInfo
               icon={<FaEnvelope size={24} />}
               label="Email"
-              value="codercryptical@gmail.com"
-              link="mailto:codercryptical@gmail.com"
+              value="mordernPantingServices@gmail.com"
+              link="mailto:mordernPantingServices@gmail.com"
             />
             <ContactInfo
               icon={<FaMapMarkerAlt size={24} />}
-              label="Location"
-              value="Rawalpindi, Pakistan"
+              label="UAE"
+              value="UAE, Dubai"
             />
           </div>
         </div>
@@ -52,14 +54,16 @@ export default function ContactSection() {
 // ✅ ENHANCED ContactInfo Component
 function ContactInfo({ icon, label, value, link }) {
   return (
-    <a 
-      href={link} 
+    <a
+      href={link}
       className="group bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg p-8 text-center flex flex-col items-center 
       hover:shadow-2xl hover:-translate-y-2 hover:bg-white transition-all duration-500 border border-gray-100 
       hover:border-teal-200 hover:ring-4 hover:ring-teal-50"
     >
-      <div className="w-16 h-16 bg-gradient-to-br from-teal-500 to-teal-600 rounded-2xl flex items-center justify-center 
-      mb-6 shadow-xl group-hover:shadow-2xl group-hover:scale-110 transition-all duration-300 mx-auto">
+      <div
+        className="w-16 h-16 bg-gradient-to-br from-teal-500 to-teal-600 rounded-2xl flex items-center justify-center 
+      mb-6 shadow-xl group-hover:shadow-2xl group-hover:scale-110 transition-all duration-300 mx-auto"
+      >
         <div className="text-2xl text-white drop-shadow-lg">{icon}</div>
       </div>
       <h3 className="font-bold text-xl text-gray-800 mb-2 group-hover:text-teal-600 transition-colors">

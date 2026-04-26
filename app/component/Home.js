@@ -5,9 +5,10 @@ import {
   FaTwitter,
   FaInstagram,
   FaLinkedin,
-} from "react-icons/fa";
+} from "react-icons/fa"; // 👈 ADD THESE!
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { whatsappUrl } from "./AllData";
 import slider1 from "@/public/images/slider/slider-1.jpg";
 import slider2 from "@/public/images/slider/slider-2.jpeg";
 import slider3 from "@/public/images/slider/slider-3.jpg";
@@ -150,7 +151,9 @@ export default function HomeSection() {
           {/* Buttons (NO motion, use CSS) */}
           <div className="flex gap-4 flex-wrap">
             <a
-              href="#contact"
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-8 py-4 bg-teal-600 text-white rounded-xl font-semibold hover:bg-teal-700 transition"
             >
               Get Free Quote

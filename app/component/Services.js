@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { servicesSections } from "./AllData";
+import { whatsappUrl } from "./AllData";
 
 export default function ServicesSection() {
   return (
@@ -8,7 +9,6 @@ export default function ServicesSection() {
       className="py-24 px-4 bg-linear-to-b from-gray-50 to-white"
     >
       <div className="container mx-auto max-w-7xl">
-        
         {/* Hero Header */}
         <div className="text-center mb-24">
           <span className="inline-block px-6 py-2 bg-teal-100 text-teal-700 rounded-full text-sm font-semibold uppercase tracking-wider mb-6">
@@ -21,7 +21,8 @@ export default function ServicesSection() {
 
           <p className="text-gray-600 max-w-2xl mx-auto text-lg">
             We provide villa painting, apartment painting, commercial painting,
-            and home maintenance services with premium quality and expert finishing.
+            and home maintenance services with premium quality and expert
+            finishing.
           </p>
 
           <div className="w-28 h-1 bg-linear-to-r from-teal-500 to-emerald-500 mx-auto rounded-full shadow-md mt-6"></div>
@@ -31,7 +32,6 @@ export default function ServicesSection() {
         <div className="space-y-20 mb-24">
           {servicesSections.map((section) => (
             <div className="scroll-mt-24" key={section.id} id={section.id}>
-              
               {/* Section Header */}
               <div className="text-center mb-16">
                 <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
@@ -90,10 +90,11 @@ export default function ServicesSection() {
           </p>
 
           <button className="bg-linear-to-r from-teal-500 to-emerald-500 text-white px-12 py-6 rounded-3xl font-bold text-lg shadow-2xl hover:scale-105 transition-all duration-300">
-            Get Free Painting Quote
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+              Get Free Painting Quote
+            </a>
           </button>
         </div>
-
       </div>
     </section>
   );

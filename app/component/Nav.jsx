@@ -3,6 +3,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { FaBrush } from "react-icons/fa6";
 import { navItems, serviceDropdown } from "./AllData";
+import { whatsappUrl } from "./AllData";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -221,13 +222,11 @@ export default function Navbar() {
         {/* Desktop CTA */}
         <div className="hidden md:block">
           <a
-            href="#contact"
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="bg-teal-500 text-white px-5 py-1.5 rounded-lg font-semibold text-sm 
                         hover:bg-teal-600 hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToSection("#contact");
-            }}
           >
             Get Quote
           </a>
