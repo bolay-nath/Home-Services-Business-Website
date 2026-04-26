@@ -1,11 +1,7 @@
 "use client";
 import { useState, useEffect, useCallback, useMemo } from "react";
-import {
-  FaFacebookF,
-  FaTwitter,
-  FaInstagram,
-  FaLinkedin,
-} from "react-icons/fa"; // 👈 ADD THESE!
+import { FaFacebookF, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { whatsappUrl } from "./AllData";
@@ -20,12 +16,10 @@ export const sliderImages = [slider1, slider2, slider3, slider4, slider5];
 export default function HomeSection() {
   const [slide, setSlide] = useState(0);
 
-  // ✅ Clean interval (no re-render issue)
   useEffect(() => {
     const interval = setInterval(() => {
       setSlide((s) => (s + 1) % sliderImages.length);
     }, 5000);
-
     return () => clearInterval(interval);
   }, []);
 
@@ -33,23 +27,26 @@ export default function HomeSection() {
     setSlide(index);
   }, []);
 
-  // ✅ Memoized (no re-render cost)
+  // ✅ FIXED SOCIAL ICONS - Higher z-index + pointer-events
   const socialIcons = useMemo(
     () => (
-      <ul className="flex flex-row lg:flex-col gap-3 bg-white/90 shadow-xl rounded-3xl px-4 py-3 border border-white/20">
+      <ul className="social-list flex flex-row lg:flex-col gap-3 bg-white/95 shadow-2xl rounded-3xl px-3 py-2 border border-white/30 backdrop-blur-xl">
         {[
           { icon: FaFacebookF, href: "#", label: "Facebook" },
-          { icon: FaTwitter, href: "#", label: "Twitter" },
+          { icon: FaXTwitter, href: "#", label: "X Twitter" },
           { icon: FaInstagram, href: "#", label: "Instagram" },
           { icon: FaLinkedin, href: "#", label: "LinkedIn" },
         ].map(({ icon: Icon, href, label }) => (
-          <li key={label}>
+          <li key={label} className="social-item">
             <a
               href={href}
               aria-label={label}
-              className="flex items-center justify-center w-11 h-11 rounded-2xl text-gray-600 hover:text-white hover:bg-teal-600 transition-all duration-300"
+              className="social-link flex items-center justify-center w-14 h-14 rounded-3xl text-gray-700 hover:text-blue-600 hover:shadow-2xl hover:-translate-y-1 active:scale-95 focus:outline-none focus:ring-4 focus:ring-teal-400/50 transition-all duration-300 ease-out group"
             >
-              <Icon size={16} />
+              <Icon
+                size={25}
+                className="group-hover:scale-110 transition-transform duration-200"
+              />
             </a>
           </li>
         ))}
@@ -63,12 +60,12 @@ export default function HomeSection() {
       id="home"
       className="relative overflow-hidden pt-28 pb-16 min-h-screen flex flex-col justify-between"
     >
-      {/* Background slider */}
+      {/* Background slider - FIXED z-index */}
       <div className="absolute inset-0 z-0">
         <AnimatePresence mode="sync">
           <motion.div
             key={slide}
-            className="absolute inset-0"
+            className="absolute inset-0 z-0" // 👈 z-0 ensures social stays on top
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -79,50 +76,49 @@ export default function HomeSection() {
               alt={`Slide ${slide + 1}`}
               fill
               priority={slide === 0}
-              loading={slide === 0 ? "eager" : "lazy"}
               sizes="100vw"
               quality={75}
-              placeholder="blur"
               className="object-cover"
+              style={{ pointerEvents: "none" }} // 👈 CRITICAL: Disables image hover blocking
             />
           </motion.div>
         </AnimatePresence>
-
         {/* Overlay */}
-        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30 z-10" />
       </div>
 
       {/* Slider dots */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-2 pointer-events-auto">
         {sliderImages.map((_, i) => (
           <button
             key={i}
             onClick={() => goToSlide(i)}
             className={`h-3 rounded-full transition-all duration-300 ${
-              i === slide ? "w-8 bg-white" : "w-3 bg-white/50"
+              i === slide
+                ? "w-8 bg-white shadow-lg"
+                : "w-3 bg-white/60 hover:bg-white"
             }`}
           />
         ))}
       </div>
 
-      {/* Desktop Social */}
-      <div className="hidden lg:flex absolute right-6 top-1/2 -translate-y-1/2 z-20">
+      {/* 🔥 FIXED Desktop Social - z-50 + pointer-events */}
+      <div className="hidden lg:flex absolute right-8 top-1/2 -translate-y-1/2 z-50 pointer-events-auto">
         {socialIcons}
       </div>
 
-      {/* ✅ Main Content with SAFE motion */}
+      {/* Main Content */}
       <motion.div
-        className="relative z-20 container mx-auto px-4 flex-1 flex items-center"
+        className="relative z-40 container mx-auto px-4 flex-1 flex items-center pointer-events-auto"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
         <div className="text-white max-w-2xl">
-          <span className="inline-block bg-teal-500/20 px-6 py-3 rounded-xl text-lg mb-6">
+          <span className="inline-block bg-teal-500/20 px-6 py-3 rounded-xl text-lg mb-6 backdrop-blur-sm">
             Professional Painting Experts
           </span>
 
-          {/* ✅ Animated heading */}
           <motion.h1
             className="text-5xl md:text-6xl font-bold mb-6 leading-tight"
             initial={{ opacity: 0, y: 20 }}
@@ -137,7 +133,6 @@ export default function HomeSection() {
             Interior • Exterior • Villa • Apartment
           </p>
 
-          {/* ✅ Light animation */}
           <motion.p
             className="text-lg mb-10 text-gray-200"
             initial={{ opacity: 0 }}
@@ -148,20 +143,18 @@ export default function HomeSection() {
             results.
           </motion.p>
 
-          {/* Buttons (NO motion, use CSS) */}
           <div className="flex gap-4 flex-wrap">
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-4 bg-teal-600 text-white rounded-xl font-semibold hover:bg-teal-700 transition"
+              className="px-8 py-4 bg-teal-600 text-white rounded-xl font-semibold hover:bg-teal-700 shadow-xl hover:shadow-teal-500/25 transition-all duration-300"
             >
               Get Free Quote
             </a>
-
             <a
               href="#services"
-              className="px-8 py-4 border border-white text-white rounded-xl hover:bg-white/10 transition"
+              className="px-8 py-4 border-2 border-white/50 text-white rounded-xl hover:bg-white/10 hover:border-teal-400 transition-all duration-300"
             >
               Explore Services
             </a>
@@ -170,7 +163,7 @@ export default function HomeSection() {
       </motion.div>
 
       {/* Mobile Social */}
-      <div className="relative z-20 lg:hidden flex justify-center mt-10">
+      <div className="relative z-40 lg:hidden flex justify-center mt-10 mb-8">
         {socialIcons}
       </div>
     </section>

@@ -1,6 +1,6 @@
 // components/Footer.tsx
 import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
-import { whatsappNumber } from "./AllData";
+import { whatsappNumber, whatsUPDisplay } from "./AllData";
 
 export default function Footer() {
   return (
@@ -54,7 +54,7 @@ export default function Footer() {
                 href={`tel:${whatsappNumber}`}
                 className="text-blue-600 font-medium"
               >
-                {whatsappNumber}
+                {whatsUPDisplay}
               </a>
             </li>
           </ul>

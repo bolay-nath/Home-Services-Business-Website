@@ -1,6 +1,6 @@
 // This file contains all the data used across the components in the application. It centralizes the content and makes it easier to manage and update.
 export const whatsappNumber = "971563202168";
-
+export const whatsUPDisplay = "+971 56 320 2168";
 export const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Hi!%20Painting%20quote%20for%20Home.`;
 
 // Data for the Navbar component.
