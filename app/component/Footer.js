@@ -1,18 +1,19 @@
 // components/Footer.tsx
 import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { whatsappNumber } from "./AllData";
 
 export default function Footer() {
   return (
     <footer className="bg-white border-t border-gray-200">
       <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-        
         {/* Company Info */}
         <div>
           <h2 className="text-xl font-bold">
             Modern <span className="text-blue-600">Painting Services</span>
           </h2>
           <p className="mt-4 text-gray-600">
-            Premium painting and maintenance services. Delivering excellence 24/7.
+            Premium painting and maintenance services. Delivering excellence
+            24/7.
           </p>
           <div className="flex space-x-4 mt-4">
             <a href="#" className="text-gray-500 hover:text-blue-600">
@@ -49,8 +50,11 @@ export default function Footer() {
             <li>Emergency 24/7</li>
             <li>
               Phone:{" "}
-              <a href="tel:+971586125333" className="text-blue-600 font-medium">
-                +971 58 612 5333
+              <a
+                href={`tel:${whatsappNumber}`}
+                className="text-blue-600 font-medium"
+              >
+                {whatsappNumber}
               </a>
             </li>
           </ul>

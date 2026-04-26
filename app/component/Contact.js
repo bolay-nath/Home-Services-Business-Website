@@ -1,4 +1,5 @@
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import { whatsappNumber } from "./AllData";
 
 export default function ContactSection() {
   return (
@@ -30,8 +31,8 @@ export default function ContactSection() {
             <ContactInfo
               icon={<FaPhone size={24} />}
               label="Call Us"
-              value="+971563202168"
-              link="tel:+971563202168"
+              value={whatsappNumber}
+              link={`tel:${whatsappNumber}`}
             />
             <ContactInfo
               icon={<FaEnvelope size={24} />}
